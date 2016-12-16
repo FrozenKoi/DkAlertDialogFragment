@@ -10,8 +10,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.frozenkoi.alertdialogfragment.demo.compat.DemoActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/button_show_dialog_with_resources"
+        android:text="@string/label_dialog_with_resources"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <TextView
+        android:id="@+id/text_last_action_dialog_with_resources"
+        android:text="@string/label_no_last_action"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@id/button_show_dialog_with_resources"
+        android:layout_toRightOf="@id/button_show_dialog_with_resources"
+        android:layout_toEndOf="@id/button_show_dialog_with_resources"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <Button
+        android:id="@+id/button_show_dialog_with_strings"
+        android:text="@string/label_dialog_with_strings"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/button_show_dialog_with_resources"
+        />
+
+    <TextView
+        android:id="@+id/text_last_action_dialog_with_strings"
+        android:text="@string/label_no_last_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@id/button_show_dialog_with_strings"
+        android:layout_toRightOf="@id/button_show_dialog_with_strings"
+        android:layout_toEndOf="@id/button_show_dialog_with_strings"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 </RelativeLayout>

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Demo Compat</string>
+    <string name="label_dialog_with_resources">Dialog with resources</string>
+    <string name="label_dialog_with_strings">Dialog with String\'s</string>
+    <string name="label_no_last_action">Nothing</string>
+
+    <string name="dialog_title_with_resources">Dialog using resources via their ID\'s</string>
+    <string name="dialog_message_with_resources">This dialog is shown using string resources via their resource id\'s</string>
+    <string name="dialog_button_positive">Positive res</string>
+    <string name="dialog_button_neutral">Neutral res</string>
+    <string name="dialog_button_negative">Negative res</string>
 </resources>
