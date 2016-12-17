@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
@@ -14,10 +15,10 @@ import android.support.v4.app.Fragment;
  * Subclass of DialogFragment that handles click events and other dialog lifecycle events.
  */
 public final class AlertDialogFragment extends DialogFragment {
-    public static final String KEY_DIALOG_ID = "key_dialog_id";
-    public static final String KEY_BUTTON_TEXT_ID_POSITIVE = "key_positive_text_id";
-    public static final String KEY_BUTTON_TEXT_ID_NEUTRAL  = "key_neutral_text_id";
-    public static final String KEY_BUTTON_TEXT_ID_NEGATIVE = "key_negative_text_id";
+    private static final String KEY_DIALOG_ID = "key_dialog_id";
+    private  static final String KEY_BUTTON_TEXT_ID_POSITIVE = "key_positive_text_id";
+    private static final String KEY_BUTTON_TEXT_ID_NEUTRAL  = "key_neutral_text_id";
+    private static final String KEY_BUTTON_TEXT_ID_NEGATIVE = "key_negative_text_id";
     private static final String KEY_BUTTON_TEXT_STRING_POSITIVE = "key_positive_text_label";
     private static final String KEY_BUTTON_TEXT_STRING_NEUTRAL = "key_neutral_text_label";
     private static final String KEY_BUTTON_TEXT_STRING_NEGATIVE = "key_negative_text_label";
@@ -26,7 +27,9 @@ public final class AlertDialogFragment extends DialogFragment {
     public static final String KEY_DIALOG_MESSAGE_ID = "key_dialog_message_text_id";
     private static final String KEY_DIALOG_TITLE_STRING = "key_dialog_title_string";
     private static final String KEY_DIALOG_MESSAGE_STRING = "key_dialog_message_string";
+
     public static final int ID_NOT_FOUND = -1;
+    public static final String DIALOG_ID_NOT_FOUND = "-1";
 
     /**
      * Key for configuration for reversing button order. Stores a boolean in the bundle.
@@ -48,16 +51,16 @@ public final class AlertDialogFragment extends DialogFragment {
     }
 
     /** Creates a new AlertDialogFragment and adds a Bundle with arguments.
-     * @param dialogID The dialog integer id. Used to identify one AlertDialogFragment from another.
+     * @param dialogID The dialog string id. Used to identify one AlertDialogFragment from another.
      * @param titleId The resource id of the text to use for the title.
      * @param messageId The resource id of the text to use for the body text.
      * @return A newly created AlertDialogFragment with a {@link Bundle} set as the arguments.
      */
-    public static AlertDialogFragment createDialogFragment(final int dialogID
+    public static AlertDialogFragment createDialogFragment(@NonNull final String dialogID
             , @StringRes final int titleId, @StringRes final int messageId) {
         AlertDialogFragment adf = new AlertDialogFragment();
         final Bundle args = new Bundle();
-        args.putInt(KEY_DIALOG_ID, dialogID);
+        args.putString(KEY_DIALOG_ID, dialogID);
         args.putInt(KEY_DIALOG_TITLE_ID, titleId);
         args.putInt(KEY_DIALOG_MESSAGE_ID, messageId);
         adf.setArguments(args);
@@ -65,7 +68,7 @@ public final class AlertDialogFragment extends DialogFragment {
     }
 
     /** Creates a new AlertDialogFragment and adds a Bundle with arguments.
-     * @param dialogID The dialog integer id. Used to identify one AlertDialogFragment from another.
+     * @param dialogID The dialog string id. Used to identify one AlertDialogFragment from another.
      * @param titleId The resource id of the text to use for the title.
      * @param messageId The resource id of the text to use for the body text.
      * @param positiveButtonId String resource to use for the label of the positive button.
@@ -73,7 +76,7 @@ public final class AlertDialogFragment extends DialogFragment {
      * @param negativeButtonId String resource to use for the label of the negative button.
      * @return A newly created AlertDialogFragment with a {@link Bundle} set as the arguments.
      */
-    private static AlertDialogFragment createDialogFragment(final int dialogID
+    private static AlertDialogFragment createDialogFragment(@NonNull final String dialogID
             , @StringRes final int titleId, @StringRes final int messageId
             , @StringRes final int positiveButtonId, @StringRes final int neutralButtonId
             , @StringRes final int negativeButtonId) {
@@ -82,7 +85,7 @@ public final class AlertDialogFragment extends DialogFragment {
     }
 
     /** Creates a new AlertDialogFragment and adds a Bundle with arguments.
-     * @param dialogID The dialog integer id. Used to identify one AlertDialogFragment from another.
+     * @param dialogID The dialog string id. Used to identify one AlertDialogFragment from another.
      * @param titleId The resource id of the text to use for the title.
      * @param messageId The resource id of the text to use for the body text.
      * @param reverseButtons Set to {@code true} to invert the order of the positive and negative
@@ -96,7 +99,7 @@ public final class AlertDialogFragment extends DialogFragment {
      * @param negativeButtonId String resource to use for the label of the negative button.
      * @return A newly created AlertDialogFragment with a {@link Bundle} set as the arguments.
      */
-    public static AlertDialogFragment createDialogFragment(final int dialogID
+    public static AlertDialogFragment createDialogFragment(@NonNull final String dialogID
             , @StringRes final int titleId, @StringRes final int messageId
             , final boolean reverseButtons
             , @StringRes final int positiveButtonId, @StringRes final int neutralButtonId
@@ -111,7 +114,7 @@ public final class AlertDialogFragment extends DialogFragment {
     }
 
     /** Creates a new AlertDialogFragment and adds a Bundle with arguments.
-     * @param dialogID The dialog integer id. Used to identify one AlertDialogFragment from another.
+     * @param dialogID The dialog string id. Used to identify one AlertDialogFragment from another.
      * @param title The text to use for the title.
      * @param message The text to use for the body text.
      * @param positiveButtonLabel String to use for the label of the positive button.
@@ -119,13 +122,13 @@ public final class AlertDialogFragment extends DialogFragment {
      * @param negativeButtonLabel String to use for the label of the negative button.
      * @return A newly created AlertDialogFragment with a {@link Bundle} set as the arguments.
      */
-    public static AlertDialogFragment createDialogFragment(final int dialogID,
+    public static AlertDialogFragment createDialogFragment(@NonNull final String dialogID,
             @Nullable final String title, @Nullable final String message,
             @Nullable final String positiveButtonLabel, @Nullable final String neutralButtonLabel,
             @Nullable final String negativeButtonLabel) {
         AlertDialogFragment adf = new AlertDialogFragment();
         final Bundle args = new Bundle();
-        args.putInt(KEY_DIALOG_ID, dialogID);
+        args.putString(KEY_DIALOG_ID, dialogID);
         args.putString(KEY_DIALOG_TITLE_STRING, title);
         args.putString(KEY_DIALOG_MESSAGE_STRING, message);
         args.putString(KEY_BUTTON_TEXT_STRING_POSITIVE, positiveButtonLabel);
@@ -135,6 +138,7 @@ public final class AlertDialogFragment extends DialogFragment {
         return adf;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
@@ -232,12 +236,12 @@ public final class AlertDialogFragment extends DialogFragment {
             = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
-            final int whichDialog = getArguments().getInt(KEY_DIALOG_ID, ID_NOT_FOUND);
+            final String whichDialog = getArguments().getString(KEY_DIALOG_ID, DIALOG_ID_NOT_FOUND);
 
             final int whichButton = chooseButtonOrder(which, mReverseButtons);
-            AlertDialogObserver tgt = getTarget();
-            if (null != tgt) {
-                tgt.onDialogButtonClicked(dialog, whichDialog, whichButton);
+            AlertDialogObserver target = getTarget();
+            if (null != target) {
+                target.onDialogButtonClicked(dialog, whichDialog, whichButton);
             }
         }
     };
@@ -249,7 +253,7 @@ public final class AlertDialogFragment extends DialogFragment {
      * @param reverseButtons {@code true} if inverting or {@code false} if not.
      * @return The id that we should use. If reverseButtons is {@code false} the same value
      *         as {@code which}. For buttons other than positive and negative, return {@code which}
-     *         unchanged regardles of {@code reverseButtons}.
+     *         unchanged regardless of {@code reverseButtons}.
      */
     private static int chooseButtonOrder(final int which, final boolean reverseButtons) {
         int whichButton = which;
@@ -272,9 +276,9 @@ public final class AlertDialogFragment extends DialogFragment {
     public void onCancel(final DialogInterface dialog) {
         super.onCancel(dialog);
 
-        AlertDialogObserver tgt = getTarget();
-        if (null != tgt) {
-            tgt.onDialogCancelled(dialog, getArguments().getInt(KEY_DIALOG_ID, ID_NOT_FOUND));
+        AlertDialogObserver target = getTarget();
+        if (null != target) {
+            target.onDialogCancelled(dialog, getArguments().getString(KEY_DIALOG_ID, DIALOG_ID_NOT_FOUND));
         }
     }
 
@@ -282,9 +286,9 @@ public final class AlertDialogFragment extends DialogFragment {
     public void onDismiss(final DialogInterface dialog) {
         super.onDismiss(dialog);
 
-        AlertDialogObserver tgt = getTarget();
-        if (null != tgt) {
-            tgt.onDialogDismissed(dialog, getArguments().getInt(KEY_DIALOG_ID, ID_NOT_FOUND));
+        AlertDialogObserver target = getTarget();
+        if (null != target) {
+            target.onDialogDismissed(dialog, getArguments().getString(KEY_DIALOG_ID, DIALOG_ID_NOT_FOUND));
         }
     }
 
@@ -303,7 +307,7 @@ public final class AlertDialogFragment extends DialogFragment {
          * @see android.content.DialogInterface.OnClickListener#onClick(
            android.content.DialogInterface, int)
          */
-        void onDialogButtonClicked(DialogInterface dialog, int whichDialog, int whichButton);
+        void onDialogButtonClicked(@NonNull final DialogInterface dialog, @NonNull final String whichDialog, int whichButton);
 
         /**
          * Called when the dialog is cancelled.
@@ -313,7 +317,7 @@ public final class AlertDialogFragment extends DialogFragment {
          * @see android.app.DialogFragment#onCancel(android.content.DialogInterface)
          * @see AlertDialogFragment#createDialogFragment createDialogFragment's dialogID parameter.
          */
-        void onDialogCancelled(DialogInterface dialog, int whichDialog);
+        void onDialogCancelled(@NonNull final DialogInterface dialog, @NonNull final String whichDialog);
 
         /**
          * Called when the dialog is dismissed.
@@ -323,6 +327,6 @@ public final class AlertDialogFragment extends DialogFragment {
          * @see android.app.DialogFragment#onDismiss(android.content.DialogInterface)
          * @see AlertDialogFragment#createDialogFragment createDialogFragment's dialogID parameter.
          */
-        void onDialogDismissed(DialogInterface dialog, int whichDialog);
+        void onDialogDismissed(@NonNull final DialogInterface dialog, @NonNull final String whichDialog);
     }
 }
