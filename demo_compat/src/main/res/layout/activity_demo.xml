@@ -57,4 +57,27 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         />
+
+    <Button
+        android:id="@+id/button_show_dialog_with_timer"
+        android:text="@string/label_dialog_with_timer"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/button_show_dialog_with_strings"
+        />
+
+    <TextView
+        android:id="@+id/text_last_action_dialog_with_timer"
+        android:text="@string/label_no_last_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@id/button_show_dialog_with_timer"
+        android:layout_toRightOf="@id/button_show_dialog_with_timer"
+        android:layout_toEndOf="@id/button_show_dialog_with_timer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 </RelativeLayout>
