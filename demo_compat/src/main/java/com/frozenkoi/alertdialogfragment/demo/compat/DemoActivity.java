@@ -1,7 +1,10 @@
 package com.frozenkoi.alertdialogfragment.demo.compat;
 
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,16 +18,29 @@ import com.frozenkoi.alertdialogfragment.lib.compat.AlertDialogFragment;
  * Activity to demonstrate usage of the DkAlertDialogFragment library.
  */
 public final class DemoActivity extends AppCompatActivity
-                          implements AlertDialogFragment.AlertDialogObserver {
+                                implements AlertDialogFragment.AlertDialogObserver {
     private static final String TAG = "DemoActivity";
 
     private static final String DIALOG_WITH_RESOURCES_FRAGMENT_TAG = "dialog.with.resources";
     private static final String DIALOG_WITH_STRINGS_FRAGMENT_TAG = "dialog.with.strings";
     private static final String DIALOG_WITH_TIMER_FRAGMENT_TAG = "dialog.with.timer";
 
+    private static final long CLOSE_TIMER = 5 * 1000;
+
     private TextView mTextResourcesResult;
     private TextView mTextStringsResult;
     private TextView mTextWithTimerResult;
+
+    @NonNull
+    private final Runnable mTimedDialogCloser = new Runnable() {
+        @Override
+        public void run() {
+            closeTimedDialog();
+        }
+    };
+
+    @NonNull
+    private final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -57,6 +73,32 @@ public final class DemoActivity extends AppCompatActivity
                 showDialogWithTimer();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // check if there is a visible timed dialog. does onResume run after or before the fragments
+        // are finished being re-added?
+
+        final Fragment fragment
+                = getSupportFragmentManager().findFragmentByTag(DIALOG_WITH_TIMER_FRAGMENT_TAG);
+        if (fragment != null) {
+            Log.d(TAG, "dialog is visible? " + fragment.isVisible());
+
+            if (fragment instanceof AlertDialogFragment) {
+                // start timer to close dialog
+                startTimerToCloseDialog();
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // stop timer, since we don't want to close the dialog while the user can't see
     }
 
     /**
@@ -102,6 +144,33 @@ public final class DemoActivity extends AppCompatActivity
                     R.string.dialog_button_neutral,
                     R.string.dialog_button_negative);
         adf.show(getSupportFragmentManager(), DIALOG_WITH_TIMER_FRAGMENT_TAG);
+
+        startTimerToCloseDialog();
+    }
+
+    private void cancelTimerToCloseDialog() {
+        Log.d(TAG, "cancelling timer");
+        mHandler.removeCallbacks(mTimedDialogCloser);
+    }
+
+    private void startTimerToCloseDialog() {
+        cancelTimerToCloseDialog();
+
+        Log.d(TAG, "starting timer to close timed dialog. will close in " + CLOSE_TIMER + " ms");
+        mHandler.postDelayed(mTimedDialogCloser, CLOSE_TIMER);
+    }
+
+    private void closeTimedDialog() {
+        final Fragment fragment
+                = getSupportFragmentManager().findFragmentByTag(DIALOG_WITH_TIMER_FRAGMENT_TAG);
+        if (fragment != null) {
+            Log.d(TAG, "dialog is visible? " + fragment.isVisible());
+
+            if (fragment instanceof AlertDialogFragment) {
+                DialogFragment dialogFragment = (DialogFragment) fragment;
+                dialogFragment.dismiss();
+            }
+        }
     }
 
     @Override
