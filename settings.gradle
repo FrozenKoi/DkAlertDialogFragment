@@ -1,1 +1,1 @@
-include ':app', ':alertdialogfragmentcompatlib', ':demo_compat'
+include ':alertdialogfragmentcompatlib', ':demo_compat'
