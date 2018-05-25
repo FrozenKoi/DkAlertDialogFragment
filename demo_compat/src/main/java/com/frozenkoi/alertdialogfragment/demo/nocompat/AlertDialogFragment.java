@@ -1,4 +1,4 @@
-package com.frozenkoi.alertdialogfragment.nocompat;
+package com.frozenkoi.alertdialogfragment.demo.nocompat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
