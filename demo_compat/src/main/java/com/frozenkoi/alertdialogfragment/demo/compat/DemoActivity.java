@@ -188,6 +188,7 @@ public final class DemoActivity extends AppCompatActivity
             case DIALOG_WITH_STRINGS_FRAGMENT_TAG:
                 mTextStringsResult.setText(text);
                 break;
+            //TODO: add case DIALOG_WITH_TIMER_FRAGMENT_TAG
             default:
                 // we don't handle this unknown dialog
         }
@@ -206,6 +207,7 @@ public final class DemoActivity extends AppCompatActivity
             case DIALOG_WITH_STRINGS_FRAGMENT_TAG:
                 mTextStringsResult.setText("cancelled");
                 break;
+            //TODO: add case DIALOG_WITH_TIMER_FRAGMENT_TAG
             default:
                 // we don't handle this unknown dialog
         }
@@ -223,6 +225,7 @@ public final class DemoActivity extends AppCompatActivity
             case DIALOG_WITH_STRINGS_FRAGMENT_TAG:
                 mTextStringsResult.setText("dismissed");
                 break;
+            //TODO: add case DIALOG_WITH_TIMER_FRAGMENT_TAG
             default:
                 // we don't handle this unknown dialog
         }

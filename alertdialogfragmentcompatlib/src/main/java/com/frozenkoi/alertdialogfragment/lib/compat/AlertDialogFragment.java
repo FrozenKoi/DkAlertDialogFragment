@@ -16,7 +16,7 @@ import android.support.v4.app.Fragment;
  */
 public final class AlertDialogFragment extends DialogFragment {
     private static final String KEY_DIALOG_ID = "key_dialog_id";
-    private  static final String KEY_BUTTON_TEXT_ID_POSITIVE = "key_positive_text_id";
+    private static final String KEY_BUTTON_TEXT_ID_POSITIVE = "key_positive_text_id";
     private static final String KEY_BUTTON_TEXT_ID_NEUTRAL  = "key_neutral_text_id";
     private static final String KEY_BUTTON_TEXT_ID_NEGATIVE = "key_negative_text_id";
     private static final String KEY_BUTTON_TEXT_STRING_POSITIVE = "key_positive_text_label";
@@ -122,6 +122,7 @@ public final class AlertDialogFragment extends DialogFragment {
      * @param negativeButtonLabel String to use for the label of the negative button.
      * @return A newly created AlertDialogFragment with a {@link Bundle} set as the arguments.
      */
+    @Deprecated
     public static AlertDialogFragment createDialogFragment(@NonNull final String dialogID,
             @Nullable final String title, @Nullable final String message,
             @Nullable final String positiveButtonLabel, @Nullable final String neutralButtonLabel,
